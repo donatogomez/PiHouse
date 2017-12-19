@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <PreferenceCategory android:title="DISPLAY INFORMATION">
+        <ListPreference
+            android:dialogTitle="Systems"
+            android:entries="@array/systems"
+            android:key="option_1"
+            android:entryValues="@array/codigo"
+            android:summary="Select one measurement system"
+            android:title="System of measurement" />
+    </PreferenceCategory>
+</PreferenceScreen>
