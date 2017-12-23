@@ -6,9 +6,13 @@
         <ListPreference
             android:dialogTitle="Systems"
             android:entries="@array/systems"
-            android:key="option_1"
             android:entryValues="@array/codigo"
+            android:key="option_1"
             android:summary="Select one measurement system"
             android:title="System of measurement" />
+        <Preference
+            android:title="Términos y condiciones" />
+        <Preference
+            android:title="Acerca de" />
     </PreferenceCategory>
 </PreferenceScreen>

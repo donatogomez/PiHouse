@@ -1,11 +1,16 @@
 package dg.com.proyecto;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,8 +26,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static dg.com.proyecto.Constants.SERVER_ADDRESS;
+
 public class DetailActivity extends AppCompatActivity {
 
+    //    private NotificationUtils mNotificationUtils;
     TextView temp_tv, pressure_tv, humidity_tv, name_tv;
     ImageView imgvw;
 
@@ -36,6 +44,9 @@ public class DetailActivity extends AppCompatActivity {
         temp_tv = (TextView) findViewById(R.id.tv_temperature);
         humidity_tv = (TextView) findViewById(R.id.tv_humidity);
         pressure_tv = (TextView) findViewById(R.id.tv_pressure);
+
+//        mNotificationUtils = new NotificationUtils();
+//        mNotificationUtils.notification();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
@@ -51,7 +62,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
         FetchData process = new FetchData();
-        process.execute("http://213.99.97.28:3389/getdata.php");
+        process.execute(SERVER_ADDRESS);
     }
 
     @Override
@@ -120,6 +131,10 @@ public class DetailActivity extends AppCompatActivity {
                     temp_tv.setText("Temperature:  " + jsonobject.getString("temperature") + " ºC");
                     humidity_tv.setText("Humidity:  " + jsonobject.getString("pressure") + " %");
                     pressure_tv.setText("Pressure:  " + jsonobject.getString("humidity") + " mPa");
+
+                    if (Float.parseFloat(jsonobject.getString("temperature")) > 20) {
+                        notification();
+                    }
                 }
 
             } catch (JSONException e)
@@ -128,5 +143,22 @@ public class DetailActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void notification() {
+        android.support.v4.app.NotificationCompat.Builder notificationBuilder = (android.support.v4.app.NotificationCompat.Builder) new android.support.v4.app.NotificationCompat.Builder(this)
+                .setDefaults(android.support.v4.app.NotificationCompat.DEFAULT_ALL)
+                .setSmallIcon(R.drawable.bell_pepper)
+                .setContentTitle("PiHouse")
+                .setContentText("La temperatura del tomate esta por encima de los limites")
+                .setPriority(NotificationManager.IMPORTANCE_HIGH);
+
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationBuilder.setContentIntent(contentIntent);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notificationBuilder.build());
     }
 }
