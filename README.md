@@ -16,7 +16,7 @@ PiHouse is a monitoring system to track your Greenhouse. Data are collected thro
 * Suggestions.
 * Notifications.
 
-Join testing!
+## Download & test
 
 If you are interested in testing the new features before being released and give us your feedback, please try out our beta channels:
 
