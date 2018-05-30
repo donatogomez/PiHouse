@@ -16,4 +16,4 @@
 * Suggestions.
 * Notifications.
 
-**License**:[GPLv3](https://github.com/donatogomez/PiHouse/blob/master/LICENSE)
+**License: [GPLv3](https://github.com/donatogomez/PiHouse/blob/master/LICENSE)**
