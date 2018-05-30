@@ -16,12 +16,4 @@
 * Suggestions.
 * Notifications.
 
-## Download & test
-
-If you are interested in testing the new features before being released and give us your feedback, please try out our beta channels:
-
-**Play Store**
-
-1. Download PiHouse app from Play Store.
-2. 
-3. 
+**License**:[GPLv3](https://github.com/donatogomez/PiHouse/blob/master/LICENSE)
